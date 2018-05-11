@@ -1,0 +1,1 @@
+# itR-react-native-favouritePlaces
