@@ -4,19 +4,13 @@ import ListItem from '../ListItem/ListItem';
 
 
 const placeList = (props) =>{
-   // const places= props.placesList.map((place, i) =>(
-                //     <ListItem key={i} 
-                //                 placeName={place} 
-                //                 onItemPressed={()=> props.onItemDeleted(i)}/>
-                //  ));
-
     return (<FlatList style={styles.listContainer}
                       data={props.placesList} 
                       renderItem={(info) => (
                         <ListItem key={info.item.key}
                                   placeName={info.item.name} 
                                   placeImage={info.item.image}
-                                  onItemPressed={()=> props.onItemDeleted(info.item.key)}/>
+                                  onItemPressed={()=> props.onItemSelected(info.item.key)}/>
                       )}
            />);
 }
