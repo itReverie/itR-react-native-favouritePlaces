@@ -5,6 +5,14 @@
 
 # dependencies
 /node_modules
+.DS_Store
+/android/.DS_Store
+/android/.idea/
+/android/app/.DS_Store
+/ios/build/.DS_Store
+package-lock.json
+#/android/app/build
+#/ios/build
 
 # misc
 .env.local
