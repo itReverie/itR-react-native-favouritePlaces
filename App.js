@@ -9,6 +9,7 @@ import {addPlace, deletePlace, selectPlace,deselectPlace} from './src/store/acti
 class App extends React.Component {
 
 onPlaceAdded = (placeName) =>{
+  console.log(placeName);
   this.props.onAddPlace(placeName)
 };
 
