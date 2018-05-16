@@ -1,68 +1,21 @@
-import React from 'react';
-import { StyleSheet, View, ScrollView} from 'react-native';
-import PlaceInput from './src/components/PlaceInput/PlaceInput';
-import PlaceList from './src/components/PlaceList/PlaceList';
-import placeImage from './src/assets/yanhui.jpg';
-import PlaceDetail from './src/components/PlaceDetail/PlaceDetail';
-import {connect} from 'react-redux';
-import {addPlace, deletePlace, selectPlace,deselectPlace} from './src/store/actions'
-class App extends React.Component {
+//Registere screen and start the navigation with one
 
-onPlaceAdded = (placeName) =>{
-  console.log(placeName);
-  this.props.onAddPlace(placeName)
-};
+import {Navigation}  from 'react-native-navigation';
 
-onItemSelected = (key) =>{
-  this.props.onSelectPlace(key)
-}
+import AuthScreen from './src/screens/Auth/Auth';
+import SharePlaceScreen from './src/screens/SharePlace/SharePlace';
+import FindPlaceScreen from './src/screens/FindPlace/FindPlace';
 
-onItemDeleted = () =>{
-  this.props.onDeletePlace()
-}
 
-onModalClosed = () =>{
-  this.props.onDeselectPlace()
-}
-  
-  render() {
-      return (
-      <View style={styles.container}>
-        <PlaceDetail selectedPlace={this.props.selectedPlaces}
-                     onItemDeleted= {this.onItemDeleted} 
-                     onModalClosed= {this.onModalClosed}/>
-        <PlaceInput onPlaceAdded={this.onPlaceAdded}/>
-        <PlaceList placesList={this.props.places}
-                  onItemSelected={this.onItemSelected} />
+//Register Screens
+Navigation.registerComponent("awesome-places.AuthScreen", ()=> AuthScreen);
+Navigation.registerComponent("awesome-places.SharePlaceScreen", ()=> SharePlaceScreen );
+Navigation.registerComponent("awesome-places.FindPlaceScreen", ()=> FindPlaceScreen );
 
-      </View>
-    );
-  }
-}
-
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    padding:20,
-    backgroundColor: '#fff',
-    alignItems: 'center',
-    justifyContent: 'flex-start',
+//start app
+Navigation.startSingleScreenApp({
+  screen: {
+      screen:"awesome-places.AuthScreen", 
+      title: "Login",
   }
 });
-
-const mapStateToProps = state  => {
-  return {
-      places: state.places.places,
-      selectedPlaces : state.places.selectedPlace
-  };
-}
-
-const mapDispatchToProps = dispatch =>{
-  return {
-  onAddPlace: (name)=> dispatch(addPlace(name)),
-  onDeletePlace: ()=> dispatch(deletePlace()),
-  onSelectPlace: (key)=> dispatch(selectPlace(key)),
-  onDeselectPlace: ()=> dispatch(deselectPlace())
-  }
-}
-export default connect(mapStateToProps,mapDispatchToProps)(App);
